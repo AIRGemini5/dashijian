@@ -220,8 +220,29 @@
             /* 3.分页插件 */
 
 
-            /*4.删除 ：  */
+            /*4.删除 ：
+              注意点： 删除按钮是模板引擎动态添加的，需要注册委托事件  */
+              $('.table>tbody').on('click','.delete',function(){
+                  var id = $(this).attr('data-id');
+                  $.ajax({
+                      url:BigNew.article_delete,
+                      type:'post',
+                      dataType:'json',
+                      data:{id:id},
+                      success: function(backData){
+                          console.log(backData);
+                          if(backData.code == 204){
+                              alert('删除成功');
+                              window.location.reload();
+                          }
+                      }
+                  });
+              });
+
+              
+            
             /* 5.编辑 ： a标签href跳转（页面间传参） */
+
             /* 6.发布 ： a标签href跳转 */
 
         });
